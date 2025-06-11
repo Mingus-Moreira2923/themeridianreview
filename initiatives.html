@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Stem for Econ Foundation - Research and Essays</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Source+Serif+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0b0b;
+      --fg: #e0e0e0;
+      --accent: #00bcd4; /* Cyan accent */
+      --gold: #ffd700;   /* Gold accent */
+      --light-grey: #f5f5f5;
+      --dark-grey: #1a1a1a; /* Darker grey for boxes */
+      --transition-speed: 0.4s; /* Consistent transition speed */
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: 'Source Serif Pro', serif;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Montserrat', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #ffffff; /* Ensure headings are bright */
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.5rem 3rem;
+      background: var(--bg);
+      border-bottom: 1px solid #1f1f1f; /* Subtle border */
+      position: sticky;
+      top: 0;
+      z-index: 999;
+    }
+
+    header h1 {
+      font-weight: 700;
+      font-size: 1.8rem;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+    }
+
+    nav a {
+      margin-left: 2.5rem;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--fg);
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: var(--gold);
+    }
+
+    .module {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem clamp(1rem, 5vw, 3rem); /* Responsive padding */
+    }
+
+    .module h2 {
+      margin-bottom: 2rem;
+      font-size: 1.8rem;
+      color: var(--accent);
+    }
+
+    .two-up {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-bottom: 3rem;
+      align-items: center; /* Vertically align items if heights differ */
+    }
+
+    .two-up .text, .two-up .media {
+      flex: 1 1 400px; /* Flex basis for responsiveness */
+    }
+
+    .two-up .media img {
+      width: 100%;
+      height: 250px; /* Fixed height for consistency */
+      object-fit: cover;
+      border-radius: 10px;
+      transition: transform var(--transition-speed) ease;
+    }
+
+    .two-up .media:hover img {
+      transform: scale(1.02); /* Subtle zoom on image hover */
+    }
+
+    .two-up h3 {
+      font-size: clamp(1.2rem, 2vw, 1.5rem); /* Responsive font size */
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+
+    .essays {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .essay {
+      background: var(--dark-grey);
+      border-radius: 10px;
+      overflow: hidden; /* To contain image zoom */
+      transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+      display: block; /* Make the whole card a link */
+      text-decoration: none;
+    }
+
+    .essay:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.25); /* Darker shadow for essays */
+    }
+
+    .essay img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      transition: transform var(--transition-speed) ease;
+    }
+
+    .essay:hover img {
+      transform: scale(1.05); /* Slightly larger zoom for essay images */
+    }
+
+    .essay .body {
+      padding: 1.5rem;
+    }
+
+    .essay h4 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.1rem;
+      color: var(--gold); /* Gold for essay titles */
+      margin-bottom: 0.5rem;
+    }
+
+    .essay p {
+      font-size: 0.95rem;
+      color: #cfd8dc; /* Lighter grey for essay text */
+    }
+
+    .cta {
+      background-color: var(--dark-grey);
+      text-align: center;
+      padding: 3rem 2rem;
+      border-radius: 10px;
+      margin-top: 3rem;
+    }
+
+    .cta h3 {
+      margin-bottom: 1rem;
+    }
+
+    .cta a {
+      background: var(--accent);
+      color: var(--bg);
+      padding: 0.75rem 2rem;
+      border-radius: 50px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      transition: background 0.3s ease, transform 0.2s ease;
+      display: inline-block; /* Allows margin-top */
+      margin-top: 1rem;
+    }
+
+    .cta a:hover {
+      background: #0097a7;
+      transform: translateY(-2px);
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: var(--bg);
+      font-size: 0.85rem;
+      color: #757575; /* Muted color for footer text */
+      border-top: 1px solid #1f1f1f;
+      margin-top: 3rem;
+    }
+
+    /* Mobile-first responsive design */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        padding: 1rem;
+        gap: 1rem;
+      }
+
+      header h1 {
+        font-size: 1.5rem;
+        text-align: center;
+      }
+
+      nav {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+
+      nav a {
+        margin: 0;
+        font-size: 0.8rem;
+        padding: 0.5rem 1rem;
+        background: var(--dark-grey);
+        border-radius: 20px;
+        transition: all 0.3s ease;
+      }
+
+      nav a:hover {
+        background: var(--accent);
+        color: var(--bg);
+      }
+
+      .module {
+        padding: 2rem 1rem;
+      }
+
+      .module h2 {
+        font-size: 1.5rem;
+        text-align: center;
+        margin-bottom: 1.5rem;
+      }
+
+      .two-up {
+        flex-direction: column;
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+      }
+
+      .two-up .media img {
+        height: 200px;
+      }
+
+      .two-up h3 {
+        font-size: 1.3rem;
+        text-align: center;
+      }
+
+      .essays {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .essay .body {
+        padding: 1.2rem;
+      }
+
+      .cta {
+        padding: 2rem 1rem;
+        margin-top: 2rem;
+      }
+
+      .cta h3 {
+        font-size: 1.2rem;
+      }
+
+      .cta p {
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+      }
+
+      .cta a {
+        padding: 0.6rem 1.5rem;
+        font-size: 0.85rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header {
+        padding: 0.75rem;
+      }
+
+      header h1 {
+        font-size: 1.3rem;
+      }
+
+      nav a {
+        font-size: 0.75rem;
+        padding: 0.4rem 0.8rem;
+      }
+
+      .module {
+        padding: 1.5rem 0.75rem;
+      }
+
+      .module h2 {
+        font-size: 1.3rem;
+      }
+
+      .two-up .media img {
+        height: 180px;
+      }
+
+      .two-up h3 {
+        font-size: 1.2rem;
+      }
+
+      .essay h4 {
+        font-size: 1rem;
+      }
+
+      .essay p {
+        font-size: 0.9rem;
+      }
+
+      .essay .body {
+        padding: 1rem;
+      }
+
+      .cta {
+        padding: 1.5rem 0.75rem;
+      }
+
+      .cta h3 {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Stem for Econ</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="research.html">Research</a>
+      <a href="initiatives.html">Initiatives and Essays</a>
+      <a href="about.html">About Us</a>
+      <a href="careers.html">Join</a>
+    </nav>
+  </header>
+
+  <section class="module">
+    <h2>Research Highlights</h2>
+    <div class="two-up">
+      <div class="media"><img src="https://placehold.co/600x400/1a1a1a/00bcd4?text=Quantum+Computing" alt="Quantum Economies research abstract visual"></div>
+      <div class="text">
+        <h3>Quantum Economies</h3>
+        <p>Exploring how quantum computing breakthroughs will reshape financial models and market dynamics. Our research examines the potential for quantum algorithms to optimize investment strategies, reduce market friction, and transform risk assessment methodologies.</p>
+      </div>
+    </div>
+
+    <div class="two-up">
+      <div class="text">
+        <h3>Vaccinations' Effect on Economic Growth</h3>
+        <p>Assessing the global economic ramifications of cutting-edge biotech innovations, specifically vaccinations on economic growth. Our findings indicate that targeted immunization programs can significantly boost GDP through reduced healthcare costs, increased workforce productivity, and stabilized market conditions in developing economies.</p>
+      </div>
+      <div class="media"><img src="https://placehold.co/600x400/1a1a1a/e0e0e0?text=Biotech+Frontiers" alt="Biotech innovations and economic growth visual"></div>
+    </div>
+  </section>
+
+  <section class="module">
+    <h2>Featured Essays</h2>
+    <div class="essays">
+      <a href="essay-ai-and-supply-chains.html" class="essay">
+        <img src="https://placehold.co/400x250/1a1a1a/00bcd4?text=AI+Supply+Chains" alt="AI and Supply Chains essay image">
+        <div class="body">
+          <h4>AI and Supply Chains</h4>
+          <p>Understanding machine learning's role in driving productivity and growth through optimization of global logistics networks.</p>
+        </div>
+      </a>
+      <a href="essay-ai-and-institutions.html" class="essay">
+        <img src="https://placehold.co/400x250/1a1a1a/ffd700?text=AI+Institutions" alt="AI and Institutions essay image">
+        <div class="body">
+          <h4>AI and Institutions: The Path to Economic Prosperity</h4>
+          <p>Turning scientific breakthroughs into sustainable economic advantages through institutional adaptation and policy innovation.</p>
+        </div>
+      </a>
+      <a href="essay-bridging-gap.html" class="essay">
+        <img src="https://placehold.co/400x250/1a1a1a/e0e0e0?text=Collaborative+Leadership" alt="Bridging Business and Academia essay image">
+        <div class="body">
+          <h4>How to Bridge the Business and Academic Gap</h4>
+          <p>Uniting academia, industry, and policy for broad-based prosperity in an increasingly complex global economy.</p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section class="module">
+    <div class="cta">
+      <h3>Join Our Mission</h3>
+      <p>Help us integrate STEM education with economic principles to build a more prosperous and sustainable future.</p>
+      <a href="contact.html">Get Involved</a>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Stem for Econ Foundation. All rights reserved.</p>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Animation for essays on scroll
+      const essays = document.querySelectorAll('.essay');
+      if (essays.length > 0) {
+        const essayObserver = new IntersectionObserver((entries) => {
+          entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+              setTimeout(() => {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+              }, index * 150); // Staggered animation
+            }
+          });
+        }, { threshold: 0.1 });
+
+        essays.forEach(essay => {
+          essay.style.opacity = '0';
+          essay.style.transform = 'translateY(20px)';
+          essay.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+          essayObserver.observe(essay);
+        });
+      }
+
+      // Animation for research highlights on scroll
+      const researchSections = document.querySelectorAll('.two-up');
+      if (researchSections.length > 0) {
+        const researchObserver = new IntersectionObserver((entries) => {
+          entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+              setTimeout(() => {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+              }, index * 200);
+            }
+          });
+        }, { threshold: 0.1 });
+
+        researchSections.forEach(section => {
+          section.style.opacity = '0';
+          section.style.transform = 'translateY(20px)';
+          section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+          researchObserver.observe(section);
+        });
+      }
+    });
+  </script>
+</body>
+</html>
