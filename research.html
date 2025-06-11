@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Research Database – Stem for Econ Foundation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Source+Serif+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* === Variables & Global === */
+  /* === Reset & Variables === */
+:root {
+  --bg: #0b0b0b;
+  --fg: #e0e0e0;
+  --accent: #00bcd4;
+  --gold: #ffd700;
+  --dark-grey: #1a1a1a;
+  --surface: #121212;
+}
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+/* === Base Typography & Links === */
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: 'Source Serif Pro', serif;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+h1, h2, h3, h4 {
+  font-family: 'Montserrat', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+}
+
+/* === Header & Navigation === */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 3rem;
+  background: var(--bg);
+  border-bottom: 1px solid #1f1f1f;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+header h1 {
+  font-weight: 700;
+  font-size: 1.8rem;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+}
+nav a {
+  margin-left: 2.5rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: color 0.3s ease;
+  color: var(--fg);
+}
+nav a:hover,
+nav a.active {
+  color: var(--gold);
+}
+
+/* === Hero Section === */
+.hero {
+  text-align: center;
+  padding: clamp(3rem, 8vw, 6rem) 2rem;
+  background: linear-gradient(145deg, var(--bg) 40%, #1f1f1f);
+}
+.hero h2 {
+  font-size: clamp(2rem, 6vw, 3rem);
+  margin-bottom: 1rem;
+}
+.hero p {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(1rem, 3vw, 1.25rem);
+  max-width: 700px;
+  margin: 0 auto;
+  color: #b0bec5;
+}
+
+/* === Publications Grid === */
+.section {
+  padding: clamp(3rem, 6vw, 4rem) 2rem;
+}
+.section-title {
+  text-align: center;
+  font-size: clamp(2rem, 5vw, 2.5rem);
+  color: var(--accent);
+  margin-bottom: 2rem;
+}
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+.card {
+  background: var(--dark-grey);
+  padding: 1.5rem;
+  border-radius: 12px;
+  transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(20px);
+}
+.card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.card:hover {
+  transform: translateY(-8px);
+  background: var(--surface);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+}
+.card h3 {
+  font-size: 1.1rem;
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+}
+.card p {
+  font-size: 0.95rem;
+  color: #cfd8dc;
+}
+
+/* === Article Overlay === */
+.article-page {
+  position: fixed;
+  inset: 0;
+  background: rgba(11,11,11,0.95);
+  backdrop-filter: blur(4px);
+  padding: clamp(2rem, 5vw, 3rem);
+  display: none;
+  overflow-y: auto;
+  z-index: 2000;
+}
+.article-page.active {
+  display: block;
+}
+.close-article,
+.back-button {
+  position: absolute;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+}
+.close-article {
+  top: 1rem;
+  right: 1rem;
+  font-size: 2rem;
+  color: var(--fg);
+}
+.back-button {
+  top: 1rem;
+  left: 1rem;
+  font-size: 0.85rem;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.back-button:hover {
+  color: #0097a7;
+}
+.article-page h2 {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  margin-bottom: 1rem;
+}
+.article-page em {
+  color: #b0bec5;
+  display: block;
+  margin-bottom: 1.5rem;
+  font-style: normal;
+}
+.article-page article {
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.75;
+}
+
+/* === Call to Action & Footer === */
+.cta {
+  text-align: center;
+  padding: clamp(2rem, 5vw, 4rem) 2rem;
+  background: var(--surface);
+}
+.cta h2 {
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
+  margin-bottom: 1.5rem;
+}
+.cta a {
+  display: inline-block;
+  background: var(--accent);
+  color: var(--bg);
+  padding: 0.75rem 2rem;
+  border-radius: 50px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+.cta a:hover {
+  background: #0097a7;
+  box-shadow: 0 4px 15px rgba(0,188,212,0.5);
+}
+footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  font-size: 0.85rem;
+  color: var(--gold);
+  border-top: 1px solid #1f1f1f;
+}
+
+/* === Responsive Adjustments === */
+@media (max-width: 768px) {
+  nav a {
+    margin-left: 1.5rem;
+  }
+  .cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero {
+    padding: clamp(4rem, 10vw, 5rem) 1rem;
+  }
+  .hero {
+    background-attachment: scroll;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Stem for Econ</h1>
+    <input type="checkbox" id="nav-toggle" hidden>
+    <label for="nav-toggle" class="nav-toggle-label">☰</label>
+    <nav class="nav">
+      <a href="home.html">Home</a>
+      <a href="research.html" class="active">Research</a>
+      <a href="initiatives.html">Initiatives and essays</a>
+      <a href="about.html">About Us</a>
+      <a href="careers.html">Join</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>Research Database</h2>
+    <p>Browse stem and econ publications. Click a card to read the full abstract inline.</p>
+  </section>
+
+  <section class="section">
+    <h2 class="section-title">Publications</h2>
+    <div class="cards">
+      <div class="card" data-article="article-1">
+        <h3>Quantum Economics: A Systematic Literature Review</h3>
+        <p>Thomas Holtfort, FOM University · Andreas Horsch, TU Freiberg</p>
+      </div>
+      <div class="card" data-article="article-2">
+        <h3>Integration of AI & Macro-Economic Analysis</h3>
+        <p>Ana Shohibul Manshur · Loso Judijanto · and collaborators</p>
+      </div>
+      <!-- Additional cards... -->
+    </div>
+  </section>
+  
+  <!-- Article Overlays -->
+  <div id="article-1" class="article-page">
+    <button class="close-article">&times;</button>
+    <button class="back-button">Back</button>
+    <h2>Computational Economic Forecasting</h2>
+    <em><b>Authors:</b> Thomas Holtfort · Andreas Horsch<br>
+      <a href="https://doi.org/10.61093/sec.8(1).62-77.2024">View PDF</a>
+    </em>
+    <article>
+      <b>Abstract</b>
+      <p>In the 21st century, various socio-economic crises have revealed that traditional economic science and (neo)classical thinking are unable to explain all the complexity of current economic problems, therefore the application of more complex and non-trivial economic concepts is gaining relevance. In addition to behavioral and evolutionary economic thinking, models of quantum economics have been developed in recent years, which allow solving economic problems, using mainly quantum thinking and the principles of quantum physics, in particular particle-wave dualism, the principle of uncertainty, the absence of a subject-object distinction, superposition and confusion. The article addresses 3 research questions (RQ). According to RQ1, the paper finds that quantum economics research is dominated by the following topics: quantum economics, quantum finance, quantum decision making, and quantum game theory. According to these four thematic descriptors, the article carries out a systematic modern review of scientific works in the period from 1978 to 2022 (if only 50 works were published in 1978-1999, then in 2000-2022 already 3430), with an emphasis on the most cited (Google Scholar) English-language journal articles. The analysis showed that articles on this topic are published mainly in journals of a non-economic profile, that the peaks of publication activity occur at times of powerful socio-economic upheavals (for example, the dot.com bubble, the substandard/financial crisis, the European debt crisis, the coronavirus pandemic, etc.). In accordance with RQ2, the article defines the key characteristics of the quantum economic model: in contrast to neoclassical economics (based on mechanistic classical physics, is rational and deterministic, with the help of the invisible hand of the market it leads to a stable equilibrium), the quantum approach, on the contrary, considers the economy as more complex, empirically oriented, uncertain, probabilistic, superpositional, as an archetypal example of a quantum social system that has its own versions of duality, measurement, and entanglement. According to RQ 3, the article determines to what extent quantum economics can update (neo)classical economics (integration of new ontological premises into economic thinking, more experimental and practical approach, connection between the concept of entanglement and sustainable development, management of financial risks based on the concept of quantum probability, rethinking the concept of randomness by quantum probability, introduction of quantum money, equilibrium using quantum games, etc.). Keywords: Quantum economics, financial market, decision-making, game theory. JEL Classification: A12, G10, D81, C70. Cite as: Holtfort, T., Horsch, A. (2024). Quantum Economics: A Systematic Literature Review. SocioEconomic Challenges, 8(1), 62-77. https://doi.org/10.61093/sec.8(1).62-77.2024 ccby This work is licensed under a Creative Commons Attribution 4.0 International License
+
+Collaborate With Our Researchers
+Get Involved
+© 2025 Stem for Econ Foundation. Innovation. Collaborat</p>
+      <!-- Full article content -->
+    </article>
+  </div>
+
+  <div id="article-2" class="article-page">
+    <button class="close-article">&times;</button>
+    <button class="back-button">Back</button>
+    <h2>Integration of AI & Macro-Economic Analysis</h2>
+    <em><b>Authors:</b> Ana Shohibul Manshur · Loso Judijanto · Dedie Tooy · others</em>
+    <article>
+      <b>Abstract</b>
+      <p>INTRODUCTION: This study introduces a groundbreaking approach that integrates Artificial Intelligence (AI) with macro-economic analysis to address a critical gap in existing economic forecasting methodologies. By leveraging diverse economic data sources, the study aims to transcend traditional analytical boundaries and provide a more comprehensive understanding of macroeconomic trends. OBJECTIVE: The primary objective is to pioneer a scalable framework for economic data analysis by combining AI with macroeconomic analysis. The study aims to utilize advanced machine learning algorithms to analyze and synthesize macroeconomic indicators, offering enhanced accuracy and predictive power. A key focus is on dynamically incorporating real-time data to adapt to evolving economic landscapes. METHODS: The research employs advanced machine learning algorithms to analyze and synthesize macroeconomic indicators. The integration of AI allows for a more nuanced understanding of complex economic dynamics. The methodology uniquely adapts to real-time data, providing a scalable framework for economic data analysis. RESULTS: The findings demonstrate the model's efficacy in predicting economic trends, surpassing conventional models in both precision and reliability. The study showcases the potential of AI-driven economic analysis to offer insights into economic dynamics with unprecedented accuracy. CONCLUSION: This study significantly contributes to the fields of AI and economics by proposing a transformative approach to macroeconomic analysis. The integration of technology and economics sets a new precedent, paving the way for future innovations in economic forecasting. The research also explores the implications of AI-driven economic analysis for policy-making, emphasizing its potential to inform more effective economic strategies.
+
+Collaborate With Our Researchers
+Get Involved
+© 2025 Stem for Econ Foundation. Innovation. Collaboration. Tran</p>
+    </article>
+  </div>
+
+  <div id="article-3" class="article-page">
+    <button class="close-article">&times;</button>
+    <button class="back-button">Back</button>
+    <article><h2>Implementation of artificial intelligence in agriculture for optimisation of irrigation and application of pesticides and herbicides</h2>
+    <em><b>Authors:</b> Tanha Talaviya a
+, 
+Dhara Shah a
+, 
+Nivedita Patel b
+, 
+Hiteshri Yagnik c
+, 
+Manan Shah d</em>
+    <article>
+      <b>Abstract</b>
+    <p>Agriculture plays a significant role in the economic sector. The automation in agriculture is the main concern and the emerging subject across the world. The population is increasing tremendously and with this increase the demand of food and employment is also increasing. The traditional methods which were used by the farmers, were not sufficient enough to fulfill these requirements. Thus, new automated methods were introduced. These new methods satisfied the food requirements and also provided employment opportunities to billions of people. Artificial Intelligence in agriculture has brought an agriculture revolution. This technology has protected the crop yield from various factors like the climate changes, population growth, employment issues and the food security problems. This main concern of this paper is to audit the various applications of Artificial intelligence in agriculture such as for irrigation, weeding, spraying with the help of sensors and other means embedded in robots and drones. These technologies saves the excess use of water, pesticides, herbicides, maintains the fertility of the soil, also helps in the efficient use of man power and elevate the productivity and improve the quality. This paper surveys the work of many researchers to get a brief overview about the current implementation of automation in agriculture, the weeding systems through the robots and drones. The various soil water sensing methods are discussed along with two automated weeding techniques. The implementation of drones is discussed, the various methods used by drones for spraying and crop-monitoring is also discussed in this paper.
+</article></p>
+Collaborate With Our Researchers
+Get Involved
+© 2025 Stem for Econ Foundation. Innovation. Collaboration. Tran</p>
+    </article>
+  </div>
+  <section class="cta">
+    <h2>Collaborate With Our Researchers</h2>
+    <a href="contact.html">Get Involved</a>
+  </section>
+
+  <footer>
+    © 2025 Stem for Econ Foundation. Innovation. Collaboration. Transformation.
+  </footer>
+
+  <script>
+    // IntersectionObserver for fade-in
+    const cards = document.querySelectorAll('.card');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.1 });
+    cards.forEach(card => observer.observe(card));
+
+    // Article overlay toggle
+    document.querySelectorAll('.card').forEach(card => {
+      card.addEventListener('click', () => {
+        document.getElementById(card.dataset.article).classList.add('active');
+      });
+    });
+    document.querySelectorAll('.close-article, .back-button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        btn.closest('.article-page').classList.remove('active');
+      });
+    });
+  </script>
+</body>
+</html>
